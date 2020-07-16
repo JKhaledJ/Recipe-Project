@@ -2,6 +2,7 @@ import { Recipe } from './recipe.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../Shared/shared.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { timer } from 'rxjs';
 
 @Injectable()
 export class RecipeService{
@@ -38,5 +39,8 @@ ingredientSelected:[Ingredient];
     }
     addToShoppingList(ingr:Ingredient[]){
       this.slService.AddIngredients(ingr);
+    }
+    getRecipeByID(id:number){
+      return this.recipes[id];
     }
 }
