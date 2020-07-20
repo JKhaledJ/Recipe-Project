@@ -6,7 +6,6 @@ import { timer } from 'rxjs';
 
 @Injectable()
 export class RecipeService{
-recipeSelected = new EventEmitter<Recipe>();
 ingredientSelected:[Ingredient];
  private recipes:Recipe[]=[
         new Recipe('A test1 recipe',
