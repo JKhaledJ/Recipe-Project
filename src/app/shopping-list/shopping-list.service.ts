@@ -5,13 +5,16 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class ShoppingListService{
     ingredientsChanged=new Subject<Ingredient[]>();
-
+    startedEditChanges = new Subject<number>();
    private ingredients: Ingredient[]=[
         new Ingredient('Apple',5),
         new Ingredient('Potato',10)
       ];
     getIngredient(){
         return this.ingredients.slice();
+    }
+    getIngredientByID(id: number){
+        return this.ingredients[id];
     }
     AddItem(ingr: Ingredient){
         this.ingredients.push(ingr);

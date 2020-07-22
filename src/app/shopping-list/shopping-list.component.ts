@@ -22,6 +22,9 @@ private igChangesSub: Subscription;
     );
   }
 
+  onEdit(index:number){
+    this.shoppingListService.startedEditChanges.next(index);
+  }
   ngOnDestroy(){
     this.igChangesSub.unsubscribe();
   }
