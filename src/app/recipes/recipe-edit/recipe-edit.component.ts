@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { NgForm, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -14,8 +14,9 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   Myform: FormGroup;
   recipe: Recipe;
-  constructor(private service: RecipeService, 
-              private route: ActivatedRoute,) {
+  constructor(private service: RecipeService,
+    private route: ActivatedRoute,
+    private router: Router) {
 
   }
 
@@ -31,11 +32,11 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
-  onAddIngredient(){
+  onAddIngredient() {
     (<FormArray>this.Myform.get('ingredients')).push(
       new FormGroup({
-        'ingrName':new FormControl(null, Validators.required),
-        'ingrAmount': new FormControl(null,[
+        'ingrName': new FormControl(null, Validators.required),
+        'ingrAmount': new FormControl(null, [
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/)
         ])
@@ -61,7 +62,7 @@ export class RecipeEditComponent implements OnInit {
           recipeIngredients.push(
             new FormGroup({
               ingrName: new FormControl(ingr.name, Validators.required),
-              ingrAmount: new FormControl(ingr.amount,[
+              ingrAmount: new FormControl(ingr.amount, [
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/)
               ])
@@ -87,18 +88,22 @@ export class RecipeEditComponent implements OnInit {
   ngOnAddOrUpdate() {
 
     const recipe = new Recipe(this.Myform.value['name'],
-                              this.Myform.value['description'],
-                              this.Myform.value['imgUrl'],
-                              this.Myform.value['ingredients']) 
+      this.Myform.value['description'],
+      this.Myform.value['imgUrl'],
+      this.Myform.value['ingredients'])
     if (this.editMode) {
       this.service.UpdateRecipe(this.id, recipe);
       this.editMode = false;
+      this.onCancel();
     }
     else {
       this.service.AddRecipe(recipe);
+      this.onCancel();
     }
   }
-
+  onCancel() {
+    this.router.navigate(['../'],{relativeTo:this.route});
+  }
 
 
 }

@@ -53,4 +53,8 @@ ingredientSelected:[Ingredient];
       this.recipes.push(recipe);
       this.recipeChanged.next(this.recipes.slice());
     }
+    DeleteRecipe(index:number){
+      this.recipes.splice(index,1);
+      this.recipeChanged.next(this.recipes.slice());
+    }
 }
