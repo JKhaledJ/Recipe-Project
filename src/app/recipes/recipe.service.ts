@@ -1,11 +1,14 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Ingredient } from '../Shared/shared.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { timer } from 'rxjs';
+
 
 @Injectable()
 export class RecipeService{
+  recipeChanged = new Subject<Recipe[]>();
+
 ingredientSelected:[Ingredient];
  private recipes:Recipe[]=[
         new Recipe('A test1 recipe',
@@ -34,12 +37,20 @@ ingredientSelected:[Ingredient];
       constructor(private slService:ShoppingListService){}
 
     getRecipes(){
-        return this.recipes.slice(); //it will return a copy of 'recipes' array.
+     return this.recipes.slice();
     }
     addToShoppingList(ingr:Ingredient[]){
       this.slService.AddIngredients(ingr);
     }
     getRecipeByID(id:number){
-      return this.recipes[id];
+      return  this.recipes[id];
+    }
+    UpdateRecipe(index:number, recipe:Recipe){
+      this.recipes[index]=recipe;
+      this.recipeChanged.next(this.recipes.slice());
+    }
+    AddRecipe(recipe: Recipe){
+      this.recipes.push(recipe);
+      this.recipeChanged.next(this.recipes.slice());
     }
 }

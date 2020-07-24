@@ -28,9 +28,10 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-                <button class="btn btn-success" type="submit" [disabled]="!f.valid">Add</button>
-                <button class="btn btn-danger" type="button" >Delete</button>
-                <button class="btn btn-primary" type="button" >Clear</button>
+                <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+                    {{editedMode ? 'Update' : 'Add'}}</button>
+                <button class="btn btn-danger" type="button" (click)="Delete()">Delete</button>
+                <button class="btn btn-primary" type="button" (click)="Reset()" >Clear</button>
             </div>
     </div>
 </form>
