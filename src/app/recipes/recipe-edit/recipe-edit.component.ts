@@ -32,20 +32,6 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
-  onAddIngredient() {
-    (<FormArray>this.Myform.get('ingredients')).push(
-      new FormGroup({
-        'ingrName': new FormControl(null, Validators.required),
-        'ingrAmount': new FormControl(null, [
-          Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)
-        ])
-      })
-    );
-
-  }
-
-
   onInitForm() {
     let name = '';
     let description = '';
@@ -105,5 +91,21 @@ export class RecipeEditComponent implements OnInit {
     this.router.navigate(['../'],{relativeTo:this.route});
   }
 
+  
+  onAddIngredient() {
+    (<FormArray>this.Myform.get('ingredients')).push(
+      new FormGroup({
+        'ingrName': new FormControl(null, Validators.required),
+        'ingrAmount': new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    );
+
+  }
+  onRemoveIngredient(id:number){
+    (<FormArray>this.Myform.get('ingredients')).removeAt(id);
+  }
 
 }
