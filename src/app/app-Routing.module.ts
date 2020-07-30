@@ -9,8 +9,10 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component'
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component'
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component'
+import { DemoComponent } from './demo/demo.component'
 const appRouting : Routes = [
     {path : '', redirectTo: '/recipes', pathMatch: 'full'},
+    {path : 'demo', component: DemoComponent},
     {path :'recipes', component: RecipesComponent, children:[
         {path: '', component:RecipeStartComponent},
         {path: 'new', component:RecipeEditComponent},

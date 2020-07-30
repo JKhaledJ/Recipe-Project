@@ -75,7 +75,7 @@ export class RecipeEditComponent implements OnInit {
 
     const recipe = new Recipe(this.Myform.value['name'],
       this.Myform.value['description'],
-      this.Myform.value['imgUrl'],
+      this.Myform.value['imageURL'],
       this.Myform.value['ingredients'])
     if (this.editMode) {
       this.service.UpdateRecipe(this.id, recipe);
@@ -95,8 +95,8 @@ export class RecipeEditComponent implements OnInit {
   onAddIngredient() {
     (<FormArray>this.Myform.get('ingredients')).push(
       new FormGroup({
-        'ingrName': new FormControl(null, Validators.required),
-        'ingrAmount': new FormControl(null, [
+        ingrName: new FormControl(null, Validators.required),
+        ingrAmount: new FormControl(null, [
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/)
         ])

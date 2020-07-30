@@ -9,7 +9,7 @@ import { RecipeDetailsComponent } from './recipes/recipe-details/recipe-details.
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { CockpitComponent } from './cockpit/cockpit.component';
+import { DemoComponent } from './demo/demo.component';
 import { dropDownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { appRoutingModule } from './app-Routing.module';
@@ -17,6 +17,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipeService } from './recipes/recipe.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { RecipeService } from './recipes/recipe.service';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    CockpitComponent,
+    DemoComponent,
     dropDownDirective,
     RecipeStartComponent,
     RecipeEditComponent
@@ -37,7 +38,8 @@ import { RecipeService } from './recipes/recipe.service';
     appRoutingModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
     
   ],
   providers: [ShoppingListService,RecipeService],
