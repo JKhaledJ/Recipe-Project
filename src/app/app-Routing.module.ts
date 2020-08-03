@@ -10,14 +10,16 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component'
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component'
 import { DemoComponent } from './demo/demo.component'
+import { RecipesResolverService } from './recipes/recipes-resolver.service'
+
 const appRouting : Routes = [
     {path : '', redirectTo: '/recipes', pathMatch: 'full'},
     {path : 'demo', component: DemoComponent},
     {path :'recipes', component: RecipesComponent, children:[
         {path: '', component:RecipeStartComponent},
         {path: 'new', component:RecipeEditComponent},
-        {path: ':id', component:RecipeDetailsComponent},
-        {path: ':id/edit', component:RecipeEditComponent},
+        {path: ':id', component:RecipeDetailsComponent, resolve:[RecipesResolverService]},
+        {path: ':id/edit', component:RecipeEditComponent,  resolve:[RecipesResolverService]},
         {path: 'recipe-list', component:RecipeListComponent, children: [
             {path:'id:/recipe-item' , component: RecipeItemComponent}
         ]},
