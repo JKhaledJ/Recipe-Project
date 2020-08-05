@@ -7,7 +7,9 @@ export class AuthInterceptorService implements HttpInterceptor{
     token;
     constructor(private authService: AuthService){
         this.authService.users.subscribe(user=>{
-            this.token=user.token;
+            if(user){
+                this.token=user.token;
+            }
         })
     }
 

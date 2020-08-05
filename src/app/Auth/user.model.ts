@@ -6,6 +6,9 @@ export class User{
                 ){}
 
     get token(){
+        // if(!this._expirationDate || this._expirationDate < new Date()){
+        //     return null;
+        // }
        return this._token; 
     }
     get expirationDate(){

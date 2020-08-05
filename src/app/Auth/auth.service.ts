@@ -18,8 +18,9 @@ export class AuthService {
 
     @Output()
     users = new Subject<User>();
-
-    constructor(private http: HttpClient) { }
+    timeOutTimer:any;
+    constructor(private http: HttpClient) { 
+    }
 
     singUp(email: string, password: string) {
         return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAssvnCNK9pqMyqj64PGi_0iusfZqN-p4s',
@@ -32,6 +33,28 @@ export class AuthService {
                 tap(resData=>{
                     this.handlingUser(resData.email,resData.localId, resData.idToken, +resData.expiresIn);
                 }))
+    }
+
+    autoLogin(){
+        const userData:
+        {
+            email:string;
+            id: string;
+            _token: string;
+            _expirationDate: string;
+        }=JSON.parse(localStorage.getItem('userData'));
+        if(!userData){
+            return;
+        }
+        const existedUser =new User(userData.email,userData.id, userData._token,new Date(userData._expirationDate) );
+
+        
+        if(existedUser.token){
+            this.users.next(existedUser);
+            const timeOut=new Date(userData._expirationDate).getTime()-new Date().getTime();
+            this.autoLogOut(timeOut);
+        }
+        
     }
     logIn(email: string, password: string) {
         return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAssvnCNK9pqMyqj64PGi_0iusfZqN-p4s',
@@ -46,10 +69,25 @@ export class AuthService {
                 }))
 
     }
+    LogOut(){
+        this.users.next(null);
+        localStorage.removeItem('userData');
+        if(this.timeOutTimer){
+             clearTimeout(this.timeOutTimer);
+        }
+       this.timeOutTimer=null;
+    }
+    autoLogOut(timeout: number){
+      this.timeOutTimer =  setTimeout(() => {
+            this.LogOut();
+        }, timeout);
+    }
     private handlingUser(email: string , localId: string, idToken: string, expiresIn: number){
         const expirationDate =new Date(new Date().getTime() + expiresIn );
         const user = new User(email,localId,idToken,expirationDate);
         this.users.next(user);
+        this.autoLogOut(expiresIn*1000);
+        localStorage.setItem('userData',JSON.stringify(user));
     }
     private handlingError(ErrorResponse: HttpErrorResponse) {
 
