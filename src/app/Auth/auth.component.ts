@@ -27,6 +27,7 @@ export class AuthComponent{
        
         this.isLoading=true;
         authObservable = this.authService.logIn(email,password);
+       
     }
     else{
         this.isLoading=true;
@@ -35,7 +36,7 @@ export class AuthComponent{
     
     authObservable.subscribe(
         responseData=>{
-            console.log(responseData);
+            
             this.error= '';
             this.isLoading=false;
             this.router.navigate(['/recipes'])
