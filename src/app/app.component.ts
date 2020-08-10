@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   loadedFeature = 'recipe';
-  onFeatureSelected(feature: string){
-    this.loadedFeature=feature;
+  onFeatureSelected(feature: string) {
+    this.loadedFeature = feature;
   }
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(){
-    this.authService.autoLogin();
+  ngOnInit() {
+    console.log("app com const")
+    //this.authService.autoLogin();
   }
 }

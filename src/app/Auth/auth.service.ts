@@ -1,7 +1,7 @@
 import { User } from './user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Injectable, Output } from '@angular/core'
-import { throwError, Subject } from 'rxjs'
+import { throwError, Subject, ReplaySubject } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators';
 
 export interface AuthResponseData {
@@ -17,7 +17,7 @@ export interface AuthResponseData {
 export class AuthService {
 
     @Output()
-    users = new Subject<User>();
+    users = new ReplaySubject<User>();
     timeOutTimer:any;
     constructor(private http: HttpClient) { 
     }
@@ -36,6 +36,7 @@ export class AuthService {
     }
 
     autoLogin(){
+        debugger;
         const userData:
         {
             email:string;
@@ -52,7 +53,7 @@ export class AuthService {
         if(existedUser.token){
             this.users.next(existedUser);
             const timeOut=new Date(userData._expirationDate).getTime()-new Date().getTime();
-            this.autoLogOut(timeOut);
+            // this.autoLogOut(timeOut);
         }
         
     }
