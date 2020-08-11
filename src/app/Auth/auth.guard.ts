@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
     this.authService.users
       .subscribe(() => {
         this.isAuth = true;
-
       }
       )
     this.authService.autoLogin();
