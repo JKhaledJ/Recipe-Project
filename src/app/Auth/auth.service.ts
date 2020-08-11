@@ -36,7 +36,6 @@ export class AuthService {
     }
 
     autoLogin(){
-        debugger;
         const userData:
         {
             email:string;

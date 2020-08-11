@@ -22,7 +22,7 @@ export class AuthComponent implements OnDestroy{
      this.isLogIn= !this.isLogIn;
  }
  onHandleClose(){
-   //  this.error=null;
+   this.error=null;
  }
  onSubmit(form: NgForm){
     const email= form.value.email;
