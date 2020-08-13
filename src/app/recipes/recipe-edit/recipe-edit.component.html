@@ -61,7 +61,7 @@
                     <div
                      class="row"
                      
-                     *ngFor="let ingrFrmGrp of Myform.get('ingredients')['controls']; let i=index"
+                     *ngFor="let ingrFrmGrp of myControl; let i=index"
                      [formGroupName]="i"
                     style="margin-top: 10px;"
                     >

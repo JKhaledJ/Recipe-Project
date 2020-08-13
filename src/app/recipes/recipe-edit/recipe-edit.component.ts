@@ -66,11 +66,11 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  // get myControl() {
-  //   // return (<FormArray>this.Myform.get('ingredients')).controls;
-  //   // console.log(((this.Myform.get('ingredients') as FormArray).controls));
-  //   return this.Myform.get('ingredients') as FormArray;
-  // }
+  get myControl() {
+    // return (<FormArray>this.Myform.get('ingredients')).controls;
+    // console.log(((this.Myform.get('ingredients') as FormArray).controls));
+    return (this.Myform.get('ingredients') as FormArray).controls;
+  }
   ngOnAddOrUpdate() {
 
     const recipe = new Recipe(this.Myform.value['name'],
