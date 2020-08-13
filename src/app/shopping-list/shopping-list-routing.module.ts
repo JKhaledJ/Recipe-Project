@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const ShoppingListRoutes : Routes = [
-    {path :'shoppinglist', component: ShoppingListComponent, children:[
+    {path :'', component: ShoppingListComponent, children:[
         {path: 'id/shopping-edit' , component: ShoppingEditComponent}
     ]},
 ]
