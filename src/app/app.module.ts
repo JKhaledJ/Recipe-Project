@@ -9,14 +9,12 @@ import { CoreModule } from './core.module';
 import { SharedModule } from './Shared/Shared.module';
 import { AppComponent } from './app.component';
 import { headerComponent } from './header/header.component';
-import { DemoComponent } from './demo/demo.component';
 import { appRoutingModule } from './app-Routing.module';
 
 @NgModule({
   declarations: [
     headerComponent,
-    AppComponent,
-    DemoComponent,
+    AppComponent
 ],
   imports: [
     appRoutingModule,

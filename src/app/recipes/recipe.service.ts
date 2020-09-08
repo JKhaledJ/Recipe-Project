@@ -46,7 +46,7 @@ ingredientSelected:[Ingredient];
       this.slService.AddIngredients(ingr);
     }
     getRecipeByID(id:number){
-      return  this.recipes[id];
+      return this.recipes[id];
     }
     UpdateRecipe(index:number, recipe:Recipe){
       this.recipes[index]=recipe;

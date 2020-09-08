@@ -93,6 +93,7 @@ export class AuthService {
     private handlingError(ErrorResponse: HttpErrorResponse) {
 
         let errorMessage = 'There is an error.';
+        console.log(ErrorResponse);
         if (!ErrorResponse.error || !ErrorResponse.error.error) {
             return throwError(errorMessage)
         }
